@@ -1,4 +1,4 @@
 github.com/ugozlave/cargo v1.2.2 h1:Y9nE87RrjVdrU1GeGP7PlUV+VUgnxHOos3fcoy+rur4=
 github.com/ugozlave/cargo v1.2.2/go.mod h1:xspN+9t34UrI9n0BZWl/F09p3EiZsv+umLWQmgZRIyo=
-github.com/ugozlave/gofast v0.4.2 h1:eJvDfGHCIfuj6a29jEi/bxrR4UIAxAkZaMuJXqTABnc=
-github.com/ugozlave/gofast v0.4.2/go.mod h1:4tSSvyYhaijwB+ozLmU+Jh4NxC+sv9yhdSXIOTieFmc=
+github.com/ugozlave/gofast v0.6.0 h1:bgGDka+qLlBqmJzu98J0y/2uUG2SGWjPvGiVMPFCbcU=
+github.com/ugozlave/gofast v0.6.0/go.mod h1:4tSSvyYhaijwB+ozLmU+Jh4NxC+sv9yhdSXIOTieFmc=
