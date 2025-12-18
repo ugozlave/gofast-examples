@@ -1,7 +1,10 @@
 package main
 
 import (
+	"context"
 	"net/http"
+	"os"
+	"os/signal"
 	"slices"
 
 	fast "github.com/ugozlave/gofast"
@@ -9,7 +12,11 @@ import (
 )
 
 func main() {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer stop()
+
 	app := faster.New()
+	defer app.Shutdown()
 
 	// config
 	fast.Cfg(app, NewUserConfig)
@@ -23,7 +30,7 @@ func main() {
 	// services
 	fast.Register[IUserService](app, NewUserService)
 
-	app.Run()
+	app.Run(ctx)
 }
 
 // config
