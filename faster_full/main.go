@@ -7,30 +7,31 @@ import (
 	"os/signal"
 	"slices"
 
-	fast "github.com/ugozlave/gofast"
+	"github.com/ugozlave/gofast"
 	"github.com/ugozlave/gofast/faster"
 )
 
 func main() {
+
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
 
 	app := faster.New()
-	defer app.Shutdown()
 
 	// config
-	fast.Cfg(app, NewUserConfig)
+	gofast.Cfg(app, NewUserConfig)
 
 	// controllers
-	fast.Add(app, NewUserController)
+	gofast.Add(app, NewUserController)
 
 	// middlewares
-	fast.Use(app, NewUserMiddleware)
+	gofast.Use(app, NewUserMiddleware)
 
 	// services
-	fast.Register[IUserService](app, NewUserService)
+	gofast.Register[IUserService](app, NewUserService)
 
 	app.Run(ctx)
+
 }
 
 // config
@@ -39,7 +40,7 @@ type UserConfig struct {
 	Users []string `json:"Users"`
 }
 
-func NewUserConfig(_ *fast.BuilderContext) *faster.FastConfig[UserConfig] {
+func NewUserConfig(_ *gofast.BuilderContext) *faster.Config[UserConfig] {
 	var v UserConfig
 	v.Users = []string{"root:root"}
 	return faster.NewConfig(v, "UserSettings")
@@ -48,14 +49,14 @@ func NewUserConfig(_ *fast.BuilderContext) *faster.FastConfig[UserConfig] {
 // controllers
 
 type UserController struct {
-	logger  fast.Logger
+	logger  gofast.Logger
 	service IUserService
 }
 
-func NewUserController(ctx *fast.BuilderContext) *UserController {
+func NewUserController(ctx *gofast.BuilderContext) *UserController {
 	return &UserController{
-		logger:  fast.MustGetLogger[UserController](ctx, fast.Scoped),
-		service: fast.MustGet[IUserService](ctx, fast.Scoped),
+		logger:  gofast.MustGetLogger[UserController](ctx, gofast.Scoped),
+		service: gofast.MustGet[IUserService](ctx, gofast.Scoped),
 	}
 }
 
@@ -79,14 +80,14 @@ func (c *UserController) Get(w http.ResponseWriter, r *http.Request) {
 // middlewares
 
 type UserMiddleware struct {
-	config  fast.Config[UserConfig]
+	config  gofast.Config[UserConfig]
 	service IUserService
 }
 
-func NewUserMiddleware(ctx *fast.BuilderContext) *UserMiddleware {
+func NewUserMiddleware(ctx *gofast.BuilderContext) *UserMiddleware {
 	return &UserMiddleware{
-		config:  fast.MustGetConfig[UserConfig](ctx, fast.Singleton),
-		service: fast.MustGet[IUserService](ctx, fast.Scoped),
+		config:  gofast.MustGetConfig[UserConfig](ctx, gofast.Singleton),
+		service: gofast.MustGet[IUserService](ctx, gofast.Scoped),
 	}
 }
 
@@ -114,7 +115,7 @@ type UserService struct {
 	data map[string]any
 }
 
-func NewUserService(ctx *fast.BuilderContext) *UserService {
+func NewUserService(ctx *gofast.BuilderContext) *UserService {
 	return &UserService{
 		data: make(map[string]any),
 	}

@@ -1,9 +1,0 @@
-{
-    "Environment": "development",
-    "Application": {
-        "Name": "example"
-    },
-    "Logging": {
-        "Level": "debug"
-    }
-}
