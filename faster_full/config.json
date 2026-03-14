@@ -1,9 +1,0 @@
-{
-    "Application": {
-        "Environment": "development",
-        "Name": "faster_full",
-        "Logging": {
-            "Level": "debug"
-        }
-    }
-}

@@ -1,0 +1,10 @@
+{
+    "Name": "00_default",
+    "Server": {
+        "Host": "localhost",
+        "Port": 8080
+    },
+    "Logging": {
+        "Level": "debug"
+    }
+}

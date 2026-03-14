@@ -1,0 +1,7 @@
+{
+    "Name": "00_default",
+    "Server": {
+        "Host": "",
+        "Port": 8080
+    }
+}
